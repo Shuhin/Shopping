@@ -4,7 +4,7 @@ const Express = require('express');
 
 const BodyParser = require('body-parser');
 
-const Path = require(path);
+const Path = require('path');
 
 const items = require('./routes/api/items');
 
