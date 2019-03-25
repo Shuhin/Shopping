@@ -2,15 +2,15 @@ const Mongoose = require('mongoose');
 
 const Express = require('express');
 
-const BodyParser = require('body-parser');
-
 const Path = require('path');
 
 const items = require('./routes/api/items');
 
+const users = require('./routes/api/users');
+
 const app = Express();
 
-app.use(BodyParser.json());
+app.use(Express.json());
 
 Mongoose.connect("mongodb://localhost/list", (err, db) => {
   if (err) {
@@ -19,7 +19,15 @@ Mongoose.connect("mongodb://localhost/list", (err, db) => {
   console.log('Connected');
 });
 
+Mongoose.connect("mongodb://localhost/Userlist", (err, db) => {
+  if (err) {
+    return console.log('Unable to Connect');
+  }
+  console.log('Connected');
+});
+
 app.use('/api/items', items)
+app.use('/api/users', users)
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static('client/build'))
