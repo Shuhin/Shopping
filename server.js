@@ -8,7 +8,10 @@ const items = require('./routes/api/items');
 
 const users = require('./routes/api/users');
 
+const auth = require('./routes/api/auth');
+
 const app = Express();
+
 
 app.use(Express.json());
 
@@ -28,6 +31,7 @@ Mongoose.connect("mongodb://localhost/Userlist", (err, db) => {
 
 app.use('/api/items', items)
 app.use('/api/users', users)
+app.use('/api/auth',auth)
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static('client/build'))

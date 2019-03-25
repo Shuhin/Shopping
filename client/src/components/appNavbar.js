@@ -9,7 +9,7 @@ import {
   NavLink,
   Container
 } from 'reactstrap';
-
+import Registration from './auth/Registration';
 class AppNavbar extends Component {
   state = {
       isOpen: false
@@ -34,6 +34,9 @@ render() {
 <NavLink href= "https://github.com/Shuhin/Shopping.git">
 Github
 </NavLink>
+</NavItem>
+<NavItem>
+  <Registration />
 </NavItem>
 </Nav>
 </Collapse>
