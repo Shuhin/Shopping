@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
   .then(items => res.json(items))
 });
 
-router.post('/', auth, (req, res) => {
+router.post('/',  (req, res) => {
   const newItem = new Item({
     name: req.body.name
   });
@@ -17,7 +17,7 @@ router.post('/', auth, (req, res) => {
   newItem.save().then(item => res.json(item));
 });
 
-router.delete('/:id', auth, (req, res) => {
+router.delete('/:id', (req, res) => {
    Item.findById(req.params.id)
     .then(item => item.remove().then(() => res.json({sucess: true})))
     .catch(err => res.status(404).json({sucess: false}));

@@ -10,6 +10,8 @@ import {
   Container
 } from 'reactstrap';
 import Registration from './auth/Registration';
+import Logout from './auth/logout'
+import Login from './auth/login'
 class AppNavbar extends Component {
   state = {
       isOpen: false
@@ -37,6 +39,12 @@ Github
 </NavItem>
 <NavItem>
   <Registration />
+</NavItem>
+<NavItem>
+  <Login />
+</NavItem>
+<NavItem>
+  <Logout />
 </NavItem>
 </Nav>
 </Collapse>

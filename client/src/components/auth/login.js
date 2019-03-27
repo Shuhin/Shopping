@@ -8,21 +8,26 @@ import {
   FormGroup,
   NavLink,
   Label,
-  Input
+  Input,
+  Alert
 } from 'reactstrap';
 
 import Axios from 'axios'
 import PropTypes from'prop-types'
 
-class Registration extends Component {
+class login extends Component {
     state = {
       modal: false,
-      name: '',
       email: '',
       password: '',
       msg: null
     };
 
+    static propTypes = {
+      isAuthenticated: PropTypes.bool,
+      error: PropTypes.object.isRequired,
+      clearErrors: PropTypes.func.isRequired
+    }
 
     toggle = () => {
       this.setState({
@@ -30,42 +35,27 @@ class Registration extends Component {
       });
     };
 
-
-
     onSubmit = e => {
       e.preventDefault();
-      const newUser = {
-      name: this.state.name,
-      email: this.state.email,
-      password: this.state.password
-      };
-
-
-      Axios.post('/api/users', newUser)
-      .then( console.log("Register Sucess"))
-      .catch( console.log("Register Fail"))
-}
+      Axios.post('/api/auth', { email: this.state.email, password: this.state.password })
+      .then(res => console.log(res.data.token))
+      .catch((error) => {
+       alert(error.message);
+       });
+     }
 
   render(){
     return(
         <div>
         <NavLink onClick = { this.toggle } href = "#">
-            Register
+            Login
         </NavLink>
 
         <Modal isOpen = { this.state.modal} toggle = {this.toggle}>
-        <ModalHeader toggle = {this.toggle}>Register</ModalHeader>
+        <ModalHeader toggle = {this.toggle}>Login</ModalHeader>
         <ModalBody>
           <Form onSubmit = {this.onSubmit}>
           <FormGroup>
-            <Label for= "name">Name</Label>
-            <Input
-              type = 'text'
-              name= 'name'
-              id= 'name'
-              placeholder= 'Name'
-              onChange={this.onChange}
-              />
 
             <Label for= "email">Email</Label>
             <Input
@@ -76,7 +66,7 @@ class Registration extends Component {
               onChange={this.onChange}
               />
 
-            <Label for= "password">Name</Label>
+            <Label for= "password">Password</Label>
             <Input
               type = "password"
               name= "password"
@@ -85,7 +75,7 @@ class Registration extends Component {
               onChange={this.onChange}
               />
           <Button color = 'dark' style = {{ marginTop: '2rem'}} block>
-          Register
+          Login
           </Button>
           </FormGroup>
           </Form>
@@ -101,4 +91,4 @@ const mapStateToProps = state => ({
   error: state.error
 });
 
-export default Registration;
+export default login;

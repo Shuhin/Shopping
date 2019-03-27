@@ -12,7 +12,7 @@ const auth = require("../../middleware/auth");
 
 const User = require("../../models/User");
 
-router.post("/", (req, res) => {
+router.post('/', (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
